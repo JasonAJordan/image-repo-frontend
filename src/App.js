@@ -1,23 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import './css/App.css';
+
+import React, { useState, useEffect } from "react"; 
+import {Route, Switch} from 'react-router-dom'; 
+
+import NavBar from "./navBar/NavBar"
+import Home from "./pages/Home"
+import UserPage from "./pages/UserPage"
+
 
 function App() {
+  const [user, setUser] = useState(null)
+  const [loaded, setLoaded] = useState(false)
+
+  //Temporary AutoLogin 
+  useEffect(() => {
+    fetch(`http://localhost:3000/users/1`)
+    .then(resp => resp.json())
+    .then(data => {
+      setUser(data)
+      setLoaded(true)
+    })
+  }, [])
+
+
+  if(user === null) {
+    return (
+      <div>
+        <h2>Hi you are logged out! This part is a work in progress </h2>
+      </div>
+    ) 
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+    <div>
+
+      <NavBar user={user} setUser={setUser}/>
+
+      <Switch>
+        <Route path="/users/:id">
+          <UserPage user={user}/>
+        </Route>
+
+        <Route path="/">
+          <Home user={user}/>
+        </Route>
+
+        <Route path="/">
+          <Home user={user}/>
+        </Route>
+      </Switch>
+
     </div>
   );
 }
