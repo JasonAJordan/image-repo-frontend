@@ -5,6 +5,7 @@ import {Route, Switch} from 'react-router-dom';
 
 import NavBar from "./navBar/NavBar"
 import Home from "./pages/Home"
+import UserPage from "./pages/UserPage"
 
 
 function App() {
@@ -33,14 +34,17 @@ function App() {
   return (
 
     <div>
-
       <NavBar user={user} setUser={setUser}/>
 
       <Switch>
+        <Route path="/users/:id">
+          <UserPage user={user}/>
+        </Route>
 
         <Route path="/">
           <Home user={user}/>
         </Route>
+
       </Switch>
 
     </div>
