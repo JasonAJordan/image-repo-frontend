@@ -1,13 +1,14 @@
 import React, { useState } from "react"; 
 
 
-function Upload({user}) {
+function Upload({user, handleNewImage}) {
 
     const [formData, setFormData] = useState({
         user_id: user.id,
         imgUrl: {},
         description: "",
     })
+    
 
     //imgUrl: "https://res.cloudinary.com/jasonjordan/image/upload/v1613589596/ajxzmzfqsamz7a2jj3fm.png",
 
@@ -23,11 +24,6 @@ function Upload({user}) {
             [e.target.name]: e.target.files[0]
         })
     }
-
-    function handleNewImage(newImage){
-        console.log("placeholder submit")
-    }
-
 
     function handleSubmit(event){
         event.preventDefault()

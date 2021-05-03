@@ -4,24 +4,41 @@ import React, { useState } from "react";
 import ImageCard from "./UserPageElements/ImageCard"
 import Upload from "./UserPageElements/Upload"
 
-function UserPage({user}) {
+
+function UserPage({user, setUser}) {
+
+    const[images, setImages] = useState(user.images)
+
+    function handleNewImage(newImage){
+        //console.log("check")
+        setImages([...images, newImage])
 
 
-    const mappedImages = user.images.map((image) => {
-        return <ImageCard image={image} key={image.id}/>
+        let updatedUser = user
+        updatedUser.images = [...images, newImage]
+        setUser(updatedUser)
+    }
+    function handleDeleteImage(image){
+
+        console.log("check backend first")
+    }
+
+
+    const mappedImages = images.map((image) => {
+        return <ImageCard image={image} key={image.id} handleDeleteImage={handleDeleteImage}/>
     })
 
     return (
-            <div>
+        <div>
                 
-                <span>{user.username}</span>
-                <br/>
-                <Upload user={user}/>
+            <span>{user.username}</span>
+            <br/>
+            <Upload user={user} handleNewImage={handleNewImage}/>
 
 
-                {mappedImages}
+            {mappedImages}
 
-            </div>
+        </div>
     )
 }
 

@@ -32,14 +32,14 @@ function App() {
   }
 
   return (
-
+  
     <div>
 
       <NavBar user={user} setUser={setUser}/>
 
       <Switch>
         <Route path="/users/:id">
-          <UserPage user={user}/>
+          <UserPage user={user} setUser={setUser}/>
         </Route>
 
         <Route path="/">
