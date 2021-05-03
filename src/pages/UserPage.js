@@ -9,18 +9,25 @@ function UserPage({user, setUser}) {
 
     const[images, setImages] = useState(user.images)
 
+    //Handling CRUD Functions for frontend
     function handleNewImage(newImage){
         //console.log("check")
         setImages([...images, newImage])
 
-
-        let updatedUser = user
+        const updatedUser = user
         updatedUser.images = [...images, newImage]
         setUser(updatedUser)
     }
-    function handleDeleteImage(image){
+    function handleDeleteImage(removedImage){
+        //console.log("check backend first")
 
-        console.log("check backend first")
+        const updatedImages = images.filter((image) => {
+            return (image.id !== removedImage.id)
+        })
+        setImages(updatedImages)
+        const updatedUser = user
+        updatedUser.images = updatedImages
+        setUser(updatedUser)
     }
 
 
@@ -34,7 +41,6 @@ function UserPage({user, setUser}) {
             <span>{user.username}</span>
             <br/>
             <Upload user={user} handleNewImage={handleNewImage}/>
-
 
             {mappedImages}
 

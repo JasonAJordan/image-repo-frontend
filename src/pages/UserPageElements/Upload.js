@@ -8,7 +8,6 @@ function Upload({user, handleNewImage}) {
         imgUrl: {},
         description: "",
     })
-    
 
     //imgUrl: "https://res.cloudinary.com/jasonjordan/image/upload/v1613589596/ajxzmzfqsamz7a2jj3fm.png",
 
