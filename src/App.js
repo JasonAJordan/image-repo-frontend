@@ -6,6 +6,9 @@ import {Route, Switch} from 'react-router-dom';
 import NavBar from "./navBar/NavBar"
 import Home from "./pages/Home"
 import UserPage from "./pages/UserPage"
+import PublicImages from "./pages/PublicImages"
+import Login from "./pages/Login"
+import SignUp from "./pages/SignUp"
 
 
 function App() {
@@ -26,24 +29,44 @@ function App() {
   if(user === null) {
     return (
       <div>
-        <h2>Hi you are logged out! This part is a work in progress </h2>
+      <NavBar user={user} setUser={setUser}/>
+
+      <Switch>
+        <Route path="/brosweUploads">
+          <PublicImages/>
+        </Route>
+
+        <Route path="/login">
+          <Login setUser={setUser}/>
+        </Route>
+
+        <Route path="/signup">
+          <SignUp setUser={setUser}/>
+        </Route>
+
+        <Route path="/">
+          <Home user={user}/>
+        </Route>
+      </Switch>
+
+
       </div>
     ) 
   }
 
   return (
-
+  
     <div>
 
       <NavBar user={user} setUser={setUser}/>
 
       <Switch>
         <Route path="/users/:id">
-          <UserPage user={user}/>
+          <UserPage user={user} setUser={setUser}/>
         </Route>
 
-        <Route path="/">
-          <Home user={user}/>
+        <Route path="/brosweUploads">
+          <PublicImages/>
         </Route>
 
         <Route path="/">

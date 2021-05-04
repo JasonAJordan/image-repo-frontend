@@ -1,12 +1,13 @@
 import React, { useState } from "react"; 
 
 
-function Upload({user}) {
+function Upload({user, handleNewImage}) {
 
     const [formData, setFormData] = useState({
         user_id: user.id,
         imgUrl: {},
         description: "",
+        public: false
     })
 
     //imgUrl: "https://res.cloudinary.com/jasonjordan/image/upload/v1613589596/ajxzmzfqsamz7a2jj3fm.png",
@@ -24,58 +25,58 @@ function Upload({user}) {
         })
     }
 
-    function handleNewImage(newImage){
-        console.log("placeholder submit")
+    function handleToggle(e){
+        setFormData({...formData, 
+            ["public"]: !formData.public})
+        console.log(formData);
     }
-
 
     function handleSubmit(event){
         event.preventDefault()
+        
 
         const form = new FormData()
         form.append("user_id", formData.user_id)
         form.append("imgUrl", formData.imgUrl)
         form.append("description", formData.description)
+        form.append("public", formData.public)
 
         fetch(`http://localhost:3000/images`,{
             method: 'POST',
             // headers:{
             //     'Content-Type': 'application/json',
-            // },
-            // body: JSON.stringify(formData),
+            // },           
             body: (form)
             })
         .then(r => r.json())
-        //Im only going to care for the backend atm
+        
         .then(newImage => handleNewImage(newImage))
     }
 
     return (
-            <div>
-                <span>Upload Form/Drag and drop will go here</span><br/>
+        <div>
+            <span>Upload Form/Drag and drop will go here</span><br/>
 
-                <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
 
-                    <h3>Upload a picture</h3>
+                <h3>Upload a picture</h3>  
                     
-                    
-                    <input type="file" name="imgUrl" 
-                    onChange={handleFormChangeForUpload}
-                    />
+                <input type="file" name="imgUrl" 
+                onChange={handleFormChangeForUpload}
+                />
+                <br/>
+                <input type="textarea" name="description" placeholder="Description"
+                    value={formData.description}
+                    onChange={handleFormChange}
+                />
 
-                    {/* <input type="textarea" name="imgUrl" 
-                        value={formData.imgUrl}
-                        onChange={handleFormChange}
-                    /> */}
+                <br/>
+                <span>Public Upload</span>
+                <input type="checkbox" onChange={handleToggle}/>
 
-                    <input type="textarea" name="description" placeholder="Description"
-                        value={formData.description}
-                        onChange={handleFormChange}
-                    />
-
-                    <div className="submit-button">
+                <div className="submit-button">
                         <button type="submit">Add the New Picture! </button>
-                    </div>
+                </div>
                 </form>
             </div>
     )
