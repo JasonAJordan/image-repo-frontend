@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from "react"; 
 import PublicImageCard from "./PublicImagesElements/PublicImageCards"
 
-function PublicImages({}) {
+function PublicImages() {
     const [images, setImages] = useState(null)
     const [loaded, setLoaded] = useState(false)
     
@@ -14,9 +14,6 @@ function PublicImages({}) {
         })
       }, [])
 
-
-   
-
     if (loaded === true) {
         let key = 0
         const mappedPublicImages = images.map((image) => {
@@ -26,7 +23,7 @@ function PublicImages({}) {
             )
         })
 
-        return (
+    return (
             <div>
                 <span>These are the publicly uploaded images</span>
 

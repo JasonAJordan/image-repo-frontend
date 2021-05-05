@@ -16,8 +16,23 @@ function UserPage({user, setUser}) {
 
         const updatedUser = user
         updatedUser.images = [...images, newImage]
-        setUser(updatedUser)
+        setUser(updatedUser) 
     }
+
+    function handleNewImages(newImages){
+        
+        for (let i = 0; i < newImages.length; i++){
+            console.log(newImages[i])
+            let thing = newImages[i]
+            setImages([...images, thing])
+        }
+        //const updatedUser = user
+        //updatedUser.images = [...images, newImage]
+        //setUser(updatedUser) 
+    }
+
+    
+
     function handleDeleteImage(removedImage){
         //console.log("check backend first")
 
@@ -40,7 +55,7 @@ function UserPage({user, setUser}) {
                 
             <span>{user.username}</span>
             <br/>
-            <Upload user={user} handleNewImage={handleNewImage}/>
+            <Upload user={user} handleNewImage={handleNewImage} handleNewImages={handleNewImages}/>
 
             {mappedImages}
 

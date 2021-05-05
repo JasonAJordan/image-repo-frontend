@@ -1,7 +1,7 @@
 import React, { useState } from "react"; 
 
 
-function Upload({user, handleNewImage}) {
+function Upload({user, handleNewImage, handleNewImages}) {
 
     const [formData, setFormData] = useState({
         user_id: user.id,
@@ -9,8 +9,6 @@ function Upload({user, handleNewImage}) {
         description: "",
         public: false
     })
-
-    //imgUrl: "https://res.cloudinary.com/jasonjordan/image/upload/v1613589596/ajxzmzfqsamz7a2jj3fm.png",
 
     function handleFormChange(event){
         setFormData({...formData,
@@ -21,14 +19,14 @@ function Upload({user, handleNewImage}) {
     function handleFormChangeForUpload(e){
         e.persist()
         setFormData({...formData,
-            [e.target.name]: e.target.files[0]
+            [e.target.name]: e.target.files
         })
     }
 
     function handleToggle(e){
         setFormData({...formData, 
             ["public"]: !formData.public})
-        console.log(formData);
+        //console.log(formData);
     }
 
     function handleSubmit(event){
@@ -37,20 +35,28 @@ function Upload({user, handleNewImage}) {
 
         const form = new FormData()
         form.append("user_id", formData.user_id)
-        form.append("imgUrl", formData.imgUrl)
         form.append("description", formData.description)
         form.append("public", formData.public)
+        //form.append("imgUrl", formData.imgUrl)
+        //let images = new Array(formData.imgUrl.length).fill(null) 
 
-        fetch(`http://localhost:3000/images`,{
-            method: 'POST',
-            // headers:{
-            //     'Content-Type': 'application/json',
-            // },           
-            body: (form)
-            })
-        .then(r => r.json())
+        for (let i = 0; i< formData.imgUrl.length; i++){
+            const uploadForm = form
+            uploadForm.append("imgUrl", formData.imgUrl[i])
+
+            fetch(`http://localhost:3000/images`,{
+                method: 'POST',
+                // headers:{
+                //     'Content-Type': 'application/json',
+                // },           
+                body: (uploadForm)
+                })
+            .then(r => r.json())
+            .then(newImage => handleNewImage(newImage))
+            //.then(newImage => images[i] = newImage)
+            
+        }
         
-        .then(newImage => handleNewImage(newImage))
     }
 
     return (
@@ -61,8 +67,8 @@ function Upload({user, handleNewImage}) {
 
                 <h3>Upload a picture</h3>  
                     
-                <input type="file" name="imgUrl" 
-                onChange={handleFormChangeForUpload}
+                <input type="file" name="imgUrl" multiple
+                    onChange={handleFormChangeForUpload}
                 />
                 <br/>
                 <input type="textarea" name="description" placeholder="Description"
