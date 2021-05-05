@@ -16,15 +16,29 @@ function App() {
   const [loaded, setLoaded] = useState(false)
 
   //Temporary AutoLogin 
-  useEffect(() => {
-    fetch(`http://localhost:3000/users/1`)
-    .then(resp => resp.json())
-    .then(data => {
-      setUser(data)
-      setLoaded(true)
-    })
-  }, [])
+  // useEffect(() => {
+  //   fetch(`http://localhost:3000/users/1`)
+  //   .then(resp => resp.json())
+  //   .then(data => {
+  //     setUser(data)
+  //     setLoaded(true)
+  //   })
+  // }, [])
 
+  useEffect(() => { 
+    const token = localStorage.getItem("token");
+    if (token) {
+      fetch("http://localhost:3000/profile", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`, 
+        }
+      })
+      .then((r) => r.json())
+      .then((user) => {setUser(user)
+      setLoaded(true)})
+    }
+  }, [])
 
   if(user === null) {
     return (

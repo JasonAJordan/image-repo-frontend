@@ -5,7 +5,7 @@ import {useParams, Link, Redirect} from 'react-router-dom';
 function NavBar({user, setUser}) {
 
     function handleLogOut(){
-        //localStorage.removeItem("token")
+        localStorage.removeItem("token")
         setUser(null)
     }
 
