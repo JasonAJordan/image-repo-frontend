@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 
 function Login ({ setUser}){
-
-    const [users, setUsers] = useState(null)
-    const [isLogin, setIsLogin] = useState(false)
 
     const [showPassword, setShowPassWord] = useState("password")
 
@@ -24,7 +21,6 @@ function Login ({ setUser}){
         })
           .then((r) => r.json())
           .then((data) => {
-              console.log(data)
               if (data.error) {
                   alert("Incorrect Username or Password")
               } else {
@@ -39,15 +35,6 @@ function Login ({ setUser}){
         });
     }
 
-
-    function loginSucess(){
-        alert("Successful Login")
-    }
-
-    function loginFail() {
-        alert("Wrong Username or password");
-    }
-
     function handleShowPassword(){
         if (showPassword === "password"){
             setShowPassWord("text")
@@ -56,15 +43,7 @@ function Login ({ setUser}){
         } 
     }
 
-    function handleWelcomeBack(){
-        console.log("asdf")
-    }
-    
 
-    // if (!users) {
-    //     return <h1> Loading </h1>
-    // } else 
-    // if (!isLogin){
         return (
             <div >
                 <br/><br/>
@@ -86,11 +65,6 @@ function Login ({ setUser}){
             </div>
      
         )
-        //}  else {
-        //         return (
-        //             <button onClick={handleWelcomeBack}><Link to={"/"}> Welcome back! </Link></button> 
-        //         )
-        // }
 
 }
 

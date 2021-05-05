@@ -1,7 +1,7 @@
 import React, { useState } from "react"; 
 
 
-function Upload({user, handleNewImage, handleNewImages}) {
+function Upload({user, handleNewImage}) {
 
     const [formData, setFormData] = useState({
         user_id: user.id,
@@ -25,13 +25,12 @@ function Upload({user, handleNewImage, handleNewImages}) {
 
     function handleToggle(e){
         setFormData({...formData, 
-            ["public"]: !formData.public})
+            public: !formData.public})
         //console.log(formData);
     }
 
     function handleSubmit(event){
         event.preventDefault()
-        
 
         const form = new FormData()
         form.append("user_id", formData.user_id)
