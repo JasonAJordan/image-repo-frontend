@@ -8,7 +8,6 @@ function SignUp ({setUser}){
         password: "",
     })
 
-
     const [passwordCheck, setpasswordCheck] = useState("")
 
     const [accountMade, setAccoutMade] = useState(false)
@@ -25,9 +24,9 @@ function SignUp ({setUser}){
 
     function handleSubmit(event){
         event.preventDefault()
-        console.log(formData)
+        //console.log(formData)
 
-        fetch(`http://localhost:3000/users`,{
+        fetch(`http://localhost:3000/register`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -35,7 +34,11 @@ function SignUp ({setUser}){
             body: JSON.stringify(formData),
             })
         .then(r => r.json())
-        .then(user => setUser(user))
+        .then(data => {
+            setUser(data.user)
+            localStorage.setItem("token", data.token)
+            history.push("/");
+        })
     }
 
     function handleLogin() {
