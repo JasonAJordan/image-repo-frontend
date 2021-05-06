@@ -1,4 +1,3 @@
-import React, { useState } from "react"; 
 function ImageCard({image, handleDeleteImage}) {
 
     function onDeleteClick(event){
@@ -10,10 +9,9 @@ function ImageCard({image, handleDeleteImage}) {
     }
 
     return (
-        <div>
-            <span>This is the image card</span><br/>
-            <img src={image.imgUrl}  width="250" height="250"/>
-            <span>{image.description}</span>
+        <div className="image">
+            <img src={image.imgUrl}  width="250" height="250" alt={image.description}/><br/>
+            <div className="imagetext" >{image.description}</div>
 
             <button onClick={onDeleteClick}>Delete</button>
 

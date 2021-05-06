@@ -1,61 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 
 function Login ({ setUser}){
 
-    const [users, setUsers] = useState(null)
-    const [isLogin, setIsLogin] = useState(false)
-    // const [formData, setFormData] = useState({ 
-    //     username: "",
-    //     password: "",
-    // })
-
-    
     const [showPassword, setShowPassWord] = useState("password")
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const history = useHistory();
-
-    // function handleFormChange(event){
-    //     //console.log(formData)
-    //     setFormData({...formData,
-    //         [event.target.name]: event.target.value
-    //     })
-
-    // }
-
-    // useEffect(() => { 
-    //     fetch(`http://localhost:3000/users/`)
-    //     .then(resp => resp.json())
-    //     .then(data => {
-    //     setUsers(data)
-        
-    //     })
-    // }, [])
-
-    // function handleLogin(event){
-    //     event.preventDefault()
-    //     //console.log(formData)
-    //     let success = false
-
-    //     for(let i = 0; i < users.length; i++){
-    //         let cond1 = (users[i].username === formData.username)
-    //         let cond2 = (users[i].password === formData.password)
-    //         //console.log(users[i].username)
-    //         if (cond1 && cond2){
-    //             setUser(users[i])
-    //             success = true
-    //             setIsLogin(true)
-    //         }
-    //     }
-    //     if (success){
-    //         loginSucess()
-    //     } else {
-    //         loginFail()
-    //     }
-    // }
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -68,7 +21,7 @@ function Login ({ setUser}){
         })
           .then((r) => r.json())
           .then((data) => {
-              if (data.failure) {
+              if (data.error) {
                   alert("Incorrect Username or Password")
               } else {
             // data is an object with a user and token: { user, token }
@@ -82,15 +35,6 @@ function Login ({ setUser}){
         });
     }
 
-
-    function loginSucess(){
-        alert("Successful Login")
-    }
-
-    function loginFail() {
-        alert("Wrong Username or password");
-    }
-
     function handleShowPassword(){
         if (showPassword === "password"){
             setShowPassWord("text")
@@ -99,15 +43,7 @@ function Login ({ setUser}){
         } 
     }
 
-    function handleWelcomeBack(){
-        console.log("asdf")
-    }
-    
 
-    // if (!users) {
-    //     return <h1> Loading </h1>
-    // } else 
-    // if (!isLogin){
         return (
             <div >
                 <br/><br/>
@@ -129,11 +65,6 @@ function Login ({ setUser}){
             </div>
      
         )
-        //}  else {
-        //         return (
-        //             <button onClick={handleWelcomeBack}><Link to={"/"}> Welcome back! </Link></button> 
-        //         )
-        // }
 
 }
 

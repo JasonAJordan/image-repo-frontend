@@ -2,20 +2,13 @@ import '../css/App.css';
 
 function Home({user}) {
 
-
-    if (user === null) {
         return (
-            <div>
-                <h3>Work in Progress</h3>
+            <div className="home">
+                <h1>Welcome to Shophotos</h1>
+                {user === null ? null :<h2>Welcome Back {user.name}</h2>} 
             </div>
         )
-    } else {
-        return (
-            <div >
-                <h3>Welcome Back {user.username}</h3>
-            </div>
-        );
-    }
+
 }
 
 export default Home;

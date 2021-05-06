@@ -9,21 +9,11 @@ import UserPage from "./pages/UserPage"
 import PublicImages from "./pages/PublicImages"
 import Login from "./pages/Login"
 import SignUp from "./pages/SignUp"
+import UnitTests from "./pages/UnitTests"
 
 
 function App() {
   const [user, setUser] = useState(null)
-  const [loaded, setLoaded] = useState(false)
-
-  //Temporary AutoLogin 
-  // useEffect(() => {
-  //   fetch(`http://localhost:3000/users/1`)
-  //   .then(resp => resp.json())
-  //   .then(data => {
-  //     setUser(data)
-  //     setLoaded(true)
-  //   })
-  // }, [])
 
   useEffect(() => { 
     const token = localStorage.getItem("token");
@@ -33,16 +23,16 @@ function App() {
         headers: {
           Authorization: `Bearer ${token}`, 
         }
-      })
+        })
       .then((r) => r.json())
       .then((user) => {setUser(user)
-      setLoaded(true)})
+      })
     }
   }, [])
 
   if(user === null) {
     return (
-      <div>
+      <div className="background"> 
       <NavBar user={user} setUser={setUser}/>
 
       <Switch>
@@ -58,6 +48,10 @@ function App() {
           <SignUp setUser={setUser}/>
         </Route>
 
+        <Route path="/UnitTests">
+          <UnitTests />
+        </Route>
+
         <Route path="/">
           <Home user={user}/>
         </Route>
@@ -70,7 +64,7 @@ function App() {
 
   return (
   
-    <div>
+    <div className="background">
 
       <NavBar user={user} setUser={setUser}/>
 
@@ -81,6 +75,10 @@ function App() {
 
         <Route path="/brosweUploads">
           <PublicImages/>
+        </Route>
+
+        <Route path="/UnitTests">
+          <UnitTests />
         </Route>
 
         <Route path="/">

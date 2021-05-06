@@ -1,0 +1,43 @@
+.navBar {
+    overflow: hidden; 
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(235, 255, 255, 1);
+}
+
+.Nav-Bar-Options {
+    float: left;
+    display: block;
+    text-align: center;
+    padding: 10px 16px;
+    font-size: 17px;
+    color: black;
+    transition: background-color 0.7s;
+}
+
+.navBar button{
+    float: right;
+    right: 0px;
+    font-size: 17px;
+    text-align: center;
+    -ms-transform: translateY(-100%);
+    transform: translateY(0%);
+    padding: 10px 32px;
+    transition: background-color 0.7s;
+    background-color: rgba(149,255,253,.9);
+    /* padding: 0; */
+    border: none;
+    background: none;
+    margin: 0px;
+}
+.navBar button:hover {
+    background:rgb(255, 70, 70);
+    color: black
+}
+
+
+.Nav-Bar-Options:hover {
+    background:rgb(255, 70, 70);
+    color: black
+}
