@@ -32,7 +32,7 @@ function App() {
 
   if(user === null) {
     return (
-      <div>
+      <div className="background"> 
       <NavBar user={user} setUser={setUser}/>
 
       <Switch>
@@ -64,7 +64,7 @@ function App() {
 
   return (
   
-    <div>
+    <div className="background">
 
       <NavBar user={user} setUser={setUser}/>
 

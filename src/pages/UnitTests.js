@@ -1,4 +1,5 @@
 import { useState }  from "react";
+import '../css/App.css';
 
 function UnitTests() {
 
@@ -116,7 +117,7 @@ function UnitTests() {
             const uploadForm = form
             uploadForm.append("imgUrl", uploadData.imgUrl[i])
 
-            fetch(`http://localhost:3000/images`,{
+            fetch(`http://localhost:3000/createdev`,{
                 method: 'POST',       
                 body: (uploadForm)
                 })
@@ -134,7 +135,7 @@ function UnitTests() {
     }
 
     return (
-        <div>
+        <div className="imagePage">
             <h3>Hello This page will can show you the Unit tests I done, Check the console!</h3>
 
             <button onClick={getPublicImages}>Check PublicImages Get request</button> 

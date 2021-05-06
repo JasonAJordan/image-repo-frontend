@@ -42,12 +42,13 @@ function Upload({user, handleNewImage}) {
         for (let i = 0; i< formData.imgUrl.length; i++){
             const uploadForm = form
             uploadForm.append("imgUrl", formData.imgUrl[i])
+            const token = localStorage.getItem("token");
 
             fetch(`http://localhost:3000/images`,{
                 method: 'POST',
-                // headers:{
-                //     'Content-Type': 'application/json',
-                // },           
+                headers: {
+                    Authorization: `Bearer ${token}`, 
+                  },          
                 body: (uploadForm)
                 })
             .then(r => r.json())
@@ -60,8 +61,6 @@ function Upload({user, handleNewImage}) {
 
     return (
         <div>
-            <span>Upload Form/Drag and drop will go here</span><br/>
-
             <form onSubmit={handleSubmit}>
 
                 <h3>Upload a picture</h3>  
@@ -82,8 +81,8 @@ function Upload({user, handleNewImage}) {
                 <div className="submit-button">
                         <button type="submit">Add the New Picture! </button>
                 </div>
-                </form>
-            </div>
+            </form>
+        </div>
     )
 }
 

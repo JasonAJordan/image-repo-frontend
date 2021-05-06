@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from "react"; 
 import PublicImageCard from "./PublicImagesElements/PublicImageCards"
+import '../css/App.css';
 
 function PublicImages() {
     const [images, setImages] = useState(null)
@@ -24,10 +25,11 @@ function PublicImages() {
         })
 
     return (
-            <div>
+            <div className="imagesPage">
                 <span>These are the publicly uploaded images</span>
-
-                {mappedPublicImages}
+                <div className="images">
+                    {mappedPublicImages}
+                </div>
                 <br/>
 
             </div>

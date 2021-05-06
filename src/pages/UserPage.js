@@ -51,13 +51,15 @@ function UserPage({user, setUser}) {
     })
 
     return (
-        <div>
+        <div className="imagesPage">
                 
-            <span>{user.username}</span>
+            <span>Your images</span>
             <br/>
             <Upload user={user} handleNewImage={handleNewImage} handleNewImages={handleNewImages}/>
 
+            <div className="images">
             {mappedImages}
+            </div>
 
         </div>
     )
