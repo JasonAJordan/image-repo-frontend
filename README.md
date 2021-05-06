@@ -1,78 +1,48 @@
-# Run these command if you want to set it up on your local machine 
-npx create-react-app
-npm install react-router-dom --save
-npm start
+
+This is the backend for my Shopify's Fall 2021 Backend Developer Internship code challege. 
+
+This app is modeled with Ruby on Rails backend, Reactjs frontend, PostgreSQL as the database, and Cloudinary as the image API. Users can upload images either privatly or publicly and can delete them as well. The app features user authentication with the help of ruby gems bycrpt and jwt. 
+
+[Link to the Backend](https://github.com/JasonAJordan/image-repo-backend)
+
+## Video-Demo 
+
+[![watch the video](https://i.imgur.com/wUfMHNm.png)](https://www.youtube.com/watch?v=6LLflfBslvk)
 
 
+##  Setup. 
 
+1. You must created your own cloudinary.rb file with your cloudinary acount api information. This file is listed in gitignore and will not transfer over if you clone done the repo. 
 
-# Getting Started with Create React App asdfasdf
+```rb
+#config/initializers/cloudinary.rb
+Cloudinary.config do |config|    
+    config.cloud_name = ""   
+    config.api_key = ""   
+    config.api_secret = ""   
+    config.secure = true    
+    config.cdn_subdomain = true  
+end
+```
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+2. Bundle install 
+3. rails db:create db:migrate db:seed
+4. rails start
+5. Run "npm start" in your console where the frontend is located. 
 
-## Available Scripts
+## Unit Tests
 
-In the project directory, you can run:
+Tests to check HTTP requests are located in the frontend [here](https://github.com/JasonAJordan/image-repo-frontend/blob/cleanup-%26-finalize/src/pages/UnitTests.js) *Note to self this link will change when I do a final merge.
+These test can be also viewed in the app itself.  
 
-### `yarn start`
+## JWT Authentication in a nutshell. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This app features the use of the ruby gem jwt. 
+[Link to their site](https://jwt.io/)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Javascript Web Token will create a bearer token for each acount. Upon login the app validates the user's credentials. Then the app gives the token to the client. This token is needed with every request made by the the client as it proves to the server that they are who they claim to be. 
 
-### `yarn test`
+For this app, I'm using jwt to authenticate user's posting image files. As well as saving a copy of that token onto the client's local storage cookie to keep them login after a page refersh. See image controller's path create and user controller's path profile for code implementation. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Example of jwt auth:
+![jwt auth flow](https://miro.medium.com/max/960/1*l-FS80RhxUgjZOKGgOXnTQ.jpeg)
