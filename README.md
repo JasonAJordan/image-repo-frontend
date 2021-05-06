@@ -32,7 +32,7 @@ end
 
 ## Unit Tests
 
-Tests to check HTTP requests are located in the frontend [here](https://github.com/JasonAJordan/image-repo-frontend/blob/cleanup-%26-finalize/src/pages/UnitTests.js) *Note to self this link will change when I do a final merge.
+Tests to check HTTP requests are located in the frontend [here](https://github.com/JasonAJordan/image-repo-frontend/blob/main/src/pages/UnitTests.js) 
 These test can be also viewed in the app itself.  
 
 ## JWT Authentication in a nutshell. 
